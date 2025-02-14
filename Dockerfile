@@ -1,20 +1,17 @@
 # Use official Python image as base
 FROM python:3.11-buster
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /app
 
-# Copy requirements file first (to cache dependencies)
-COPY requirements.txt .
+# Copy application files into container
+COPY . .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application files
-COPY . .
-
-# Expose port
+# Expose port for FastAPI
 EXPOSE 8000
 
-# Run FastAPI application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run FastAPI app (Updated path)
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
