@@ -1,3 +1,5 @@
+name: CI/CD Pipeline
+
 on:
   push:
     branches:
@@ -39,20 +41,23 @@ jobs:
       contents: 'read'
       id-token: 'write'
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      # Authenticate with Google Cloud
-      - uses: 'google-github-actions/auth@v2'
+      # Authenticate with Google Cloud using GitHub Secrets
+      - name: Authenticate with Google Cloud
+        uses: 'google-github-actions/auth@v2'
         with:
           project_id: 'assignment-2-450920'
-          workload_identity_provider: 'projects/569598913464/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider'
+          workload_identity_provider: '${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}'
 
-      # Configure Docker for Artifact Registry
-      - name: gcloud Configure Docker
+      # Configure Docker for Google Artifact Registry
+      - name: Configure Docker for GCP
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
       # Build and Push Docker Image
-      - name: Build and Push
+      - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
           context: ./
