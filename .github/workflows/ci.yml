@@ -52,6 +52,7 @@ jobs:
           project_id: 'assignment-2-450920'
           workload_identity_provider: '${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}'
           service_account: '${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}'
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
       # Configure Docker for Google Artifact Registry
       - name: Configure Docker for GCP
