@@ -65,3 +65,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: us-central1-docker.pkg.dev/assignment-2-450920/fastapi-repo/fastapi-server:v2
+          
