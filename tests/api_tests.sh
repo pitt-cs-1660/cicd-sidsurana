@@ -39,7 +39,7 @@ printf "\n"
 cat response.json
 printf "\n"
 
-task_id=$(jq -r '.id' response.json)
+task_id=$(jq -r '.task_id' response.json)
 echo "Task ID: $task_id"
 
 
