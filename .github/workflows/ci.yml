@@ -77,7 +77,7 @@ jobs:
         with:
           project_id: 'assignment-2-450920'
           workload_identity_provider: 'projects/569598913464/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider'
-          service_account: 'github-actions@assignment-2-450920.iam.gserviceaccount.com'
+          service_account_email: 'github-actions@assignment-2-450920.iam.gserviceaccount.com'
 
       # Configure Docker for Google Artifact Registry
       - name: Configure Docker for GCP
