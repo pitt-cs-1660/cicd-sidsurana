@@ -11,7 +11,7 @@
 #   - 'curl' is installed
 #   - 'jq' is installed (for parsing JSON responses)
 
-BASE_URL="http://localhost:8000"
+API_URL="http://localhost:8000"
 
 check_status() {
     local status_code=$1
