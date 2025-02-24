@@ -83,6 +83,12 @@ jobs:
       - name: Configure Docker for GCP
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
+      - name: Debug Authentication
+        run: |
+        gcloud auth list
+        gcloud config list
+
+
       # Build and Push Docker Image
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
