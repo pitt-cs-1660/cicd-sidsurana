@@ -85,8 +85,8 @@ jobs:
 
       - name: Debug Authentication
         run: |
-        gcloud auth list
-        gcloud config list
+          gcloud auth list
+          gcloud config list
 
 
       # Build and Push Docker Image
