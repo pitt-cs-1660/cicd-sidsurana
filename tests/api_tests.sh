@@ -11,7 +11,7 @@
 #   - 'curl' is installed
 #   - 'jq' is installed (for parsing JSON responses)
 
-BASE_URL="http://localhost:8000"
+BASE_URL="http://localhost"
 
 check_status() {
     local status_code=$1
@@ -39,7 +39,7 @@ printf "\n"
 cat response.json
 printf "\n"
 
-task_id=$(jq -r '.task_id' response.json)
+task_id=$(jq -r '.id' response.json)
 echo "Task ID: $task_id"
 
 
