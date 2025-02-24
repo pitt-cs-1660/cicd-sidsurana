@@ -1,17 +1,25 @@
-# Use official Python image as base
-FROM python:3.11-buster
+# Stage 1: Build Stage
+FROM python:3.9-slim AS builder
 
-# Set working directory inside container
 WORKDIR /app
 
-# Copy application files into container
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Stage 2: Runtime Stage
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Copy only the necessary files from the builder stage
+COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
 COPY . .
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose port for FastAPI
+# Expose port 8000
 EXPOSE 8000
 
-# Run FastAPI app (Updated path)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Command to run FastAPI application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
