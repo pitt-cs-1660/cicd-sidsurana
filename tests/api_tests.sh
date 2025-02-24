@@ -33,7 +33,7 @@ EOF
 }
 
 echo "#### Generate a new task ####"
-post_response=$(curl -s -o response.json -w "%{http_code}" -X POST -H "Content-Type: application/json" -d "$(generate_post_data)" $BASE_URL/api/tasks)
+post_response=$(curl -s -o response.json -w "%{http_code}" -X POST -H "Content-Type: application/json" -d "$(generate_post_data)" $API_URL/api/tasks)
 check_status "$post_response" "POST /api/tasks"
 printf "\n"
 cat response.json
@@ -44,7 +44,7 @@ echo "Task ID: $task_id"
 
 
 echo "#### Get the list of tasks ####"
-get_response=$(curl -s -o response.json -w "%{http_code}" $BASE_URL/api/tasks)
+get_response=$(curl -s -o response.json -w "%{http_code}" $API_URL/api/tasks)
 check_status "$get_response" "GET /api/tasks"
 printf "\n"
 cat response.json
@@ -52,7 +52,7 @@ printf "\n"
 
 
 echo "#### Update the task ####"
-update_response=$(curl -s -o response.json -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d '{"title": "GHA Task Updated"}' $BASE_URL/api/tasks/$task_id)
+update_response=$(curl -s -o response.json -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d '{"title": "GHA Task Updated"}' $API_URL/api/tasks/$task_id)
 check_status "$update_response" "PUT /api/tasks/$task_id"
 printf "\n"
 cat response.json
@@ -60,7 +60,7 @@ printf "\n"
 
 
 echo "#### Delete the task ####"
-delete_response=$(curl -s -o response.json -w "%{http_code}" -X DELETE $BASE_URL/api/tasks/$task_id)
+delete_response=$(curl -s -o response.json -w "%{http_code}" -X DELETE $API_URL/api/tasks/$task_id)
 check_status "$delete_response" "DELETE /api/tasks/$task_id"
 printf "\n"
 cat response.json
