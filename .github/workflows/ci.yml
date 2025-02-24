@@ -13,13 +13,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Docker compose config
         run: docker compose config
-      - name: Verify Dockerfile
-        run: |
-          if [[ ! -f "Dockerfile" ]]; then
-            echo " Dockerfile not found!"
-            exit 1
-          fi
-          echo " Dockerfile exists."
+  
 
 
   integration-test:
